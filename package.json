@@ -17,7 +17,7 @@
     "url": "git+https://github.com/PDFTron/web-to-pdf.git"
   },
   "author": "Logan Bittner",
-  "license": "ISC",
+  "license": "AGPL",
   "bugs": {
     "url": "https://github.com/PDFTron/web-to-pdf/issues"
   },
