@@ -1,6 +1,6 @@
 {
   "name": "@pdftron/web-to-pdf",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Headless HTML to PDF conversion",
   "main": "dist/web-to-pdf.js",
   "bin": {
@@ -9,7 +9,7 @@
   "scripts": {
     "test": "nyc mocha --compilers js:@babel/register",
     "build": "npm run test && npx webpack",
-    "publish-npm": "npm run build && npm publish --access private",
+    "publish-npm": "npm run build && npm publish",
     "preinstall": "npm i node-sass live-server --save"
   },
   "repository": {
