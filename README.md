@@ -5,6 +5,8 @@ Created and maintained by [PDFTron](https://pdftron.com).
 
 **This project is still in development and should not be used in a production environment! It has not been tested in all use cases.** 
 
+**We are very interested in seeing how people use this tool. If you have any questions, comments or would just like to tell us how you're using it, please feel free to open a ticket!**
+
 ## Features
 - 💥 JS is fully supported, meaning you can use your favorite frameworks to generate your PDF.
 - 🔄 Comes with a powerful [content replacement](./documentation/content.md) system that allows for dynamic content.
