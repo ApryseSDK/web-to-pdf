@@ -1,0 +1,7 @@
+{
+  "test": "test",
+  "react": "pdf",
+  "nested": {
+    "data": "is cool"
+  }
+}

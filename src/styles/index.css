@@ -1,0 +1,81 @@
+* {
+  box-sizing: border-box;
+  -webkit-print-color-adjust: exact;
+}
+
+html, body {
+  padding: 0;
+  margin: 0;
+  font-family: Roboto;
+  background-color: rgb(247, 239, 239);
+  color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.__PAGE_NAME {
+  width: __WIDTH !important;
+  height: __HEIGHT !important;
+  background-color: white;
+  position: relative;
+  padding: __MARGIN;
+}
+
+body * {
+  max-width: __WIDTH;
+  max-height: __HEIGHT;
+}
+
+.page-spacer {
+  height: 2px;
+  width: 100vw;
+  background: #00a5e4;
+  opacity: 0.5;
+  left: 0;
+  min-width: 100vw;
+  z-index: 999;
+}
+
+.List {
+  max-height: 100% !important;
+}
+
+.List > * {
+  max-height: 100% !important;
+}
+
+.webpdf-element {
+  position: absolute;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 99;
+}
+
+.webpdf-header {
+  top: 0;
+}
+
+.webpdf-footer {
+  bottom: 0;
+}
+
+.webpdf-error {
+  color: white;
+  background-color: red;
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.webpdf-error p {
+  font-size: 40px;
+}
+

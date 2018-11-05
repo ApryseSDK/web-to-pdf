@@ -1,0 +1,14 @@
+.Split {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #222222;
+  color: white;
+  font-family: arial;
+
+  p {
+    text-align: center;
+    color: blue;
+  }
+}

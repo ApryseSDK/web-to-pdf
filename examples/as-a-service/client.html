@@ -1,0 +1,24 @@
+<html>
+
+  <body>
+
+    <input id='input' type='text'>
+
+    <button onclick="getPDF()">Submit</button>
+
+    <script type='text/javascript'>
+
+      function getPDF () {
+        const url = document.getElementById('input').value;
+
+        fetch(`http://localhost:8080/convert?url=${url}`)
+          .then(res => res.text())
+          .then(text => {
+            window.open(text);
+          })
+
+      }
+
+    </script>
+  </body>
+</html>

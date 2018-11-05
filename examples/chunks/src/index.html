@@ -1,0 +1,18 @@
+<html>
+  <head>
+    <link rel='stylesheet' href='./index.scss'>
+  </head>
+
+  <body>
+    <div class='Page'>
+      <h2>Insert chunks of content using mustache syntax and the chunks api</h2>
+      {{fileChunk}}
+
+      <h2>Chunks can be any input that templateSource accepts<br/>(html string, React component, html file, function)</h2>
+      {{reactChunk}}
+
+      <h2>No need to duplicate your html!</h2>
+      {{htmlChunk}}
+    </div>
+  </body>
+</html>
