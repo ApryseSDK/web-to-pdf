@@ -9,13 +9,13 @@ Created and maintained by [PDFTron](https://pdftron.com).
 
 ## Features
 - 💥 JS is fully supported, meaning you can use your favorite frameworks to generate your PDF.
-- 🔄 Comes with a powerful [content replacement](./documentation/content.md) system that allows for dynamic content.
-- 🔢 Insert [page numbers](./documentation/creating-pages.md#page-numbers) in your pages dynamically.
-- 💃 [Full SCSS support](./documentation/api.md#styles)
-- 👸 Support for [headers and footers](./documentation/headers-footers.md)
-- 🔗 Support for reusuable [HTML chunks](./documentation/chunks.md)
-- 🎥 [Real time mode](./documentation/real-time.md) with hot reloading, meaning you can build your PDF in real time
-- 🌏 Support for [rendering remote pages](./documentation/remote-api.md) (You can even inject your own css and js!)
+- 🔄 Comes with a powerful [content replacement](https://github.com/PDFTron/web-to-pdf/tree/master/documentation/content.md) system that allows for dynamic content.
+- 🔢 Insert [page numbers](https://github.com/PDFTron/web-to-pdf/tree/master/documentation/creating-pages.md#page-numbers) in your pages dynamically.
+- 💃 [Full SCSS support](https://github.com/PDFTron/web-to-pdf/tree/master/documentation/api.md#styles)
+- 👸 Support for [headers and footers](https://github.com/PDFTron/web-to-pdf/tree/master/documentation/headers-footers.md)
+- 🔗 Support for reusuable [HTML chunks](https://github.com/PDFTron/web-to-pdf/tree/master/documentation/chunks.md)
+- 🎥 [Real time mode](https://github.com/PDFTron/web-to-pdf/tree/master/documentation/real-time.md) with hot reloading, meaning you can build your PDF in real time
+- 🌏 Support for [rendering remote pages](https://github.com/PDFTron/web-to-pdf/tree/master/documentation/remote-api.md) (You can even inject your own css and js!)
 - 🚦 Memory management system so you can render 1000's of PDFs with a single script.
 - 👍 Much more!
 
@@ -66,20 +66,20 @@ r.render({
 See more examples [here](examples/).
 
 ## Documentation
-- [Creating pages + Dynamic page numbers](./documentation/creating-pages.md)
-- [API](./documentation/api.md)
-- [Rendering remote pages](./documentation/remote-api.md)
-- [Headers and footers](./documentation/headers-footers.md)
-- [Reusable Chunks](./documentation/chunks.md)
-- [Lists](./documentation/lists.md)
-- [Real time PDF building](./documentation/real-time.md)
-- [Styling with CSS & SASS](./documentation/api.md#styles)
-- [Assets](./documentation/assets.md)
-- [Dynamic content](./documentation/content.md)
+- [Creating pages + Dynamic page numbers](https://github.com/PDFTron/web-to-pdf/blob/master/documentation/creating-pages.md)
+- [API](https://github.com/PDFTron/web-to-pdf/blob/master/documentation/api.md)
+- [Rendering remote pages](https://github.com/PDFTron/web-to-pdf/blob/master/documentation/remote-api.md)
+- [Headers and footers](https://github.com/PDFTron/web-to-pdf/blob/master/documentation/headers-footers.md)
+- [Reusable Chunks](https://github.com/PDFTron/web-to-pdf/blob/master/documentation/chunks.md)
+- [Lists](https://github.com/PDFTron/web-to-pdf/blob/master/documentation/lists.md)
+- [Real time PDF building](https://github.com/PDFTron/web-to-pdf/blob/master/documentation/real-time.md)
+- [Styling with CSS & SASS](https://github.com/PDFTron/web-to-pdf/blob/master/documentation/api.md#styles)
+- [Assets](https://github.com/PDFTron/web-to-pdf/blob/master/documentation/assets.md)
+- [Dynamic content](https://github.com/PDFTron/web-to-pdf/blob/master/documentation/content.md)
 
 ## Real time PDF Building
 With a few changes to your options you can enable real time PDF building!
-See [the docs](./documentation/real-time.md) for more info.
+See [the docs](https://github.com/PDFTron/web-to-pdf/blob/master/documentation/real-time.md) for more info.
 
 ## Development
 ```
