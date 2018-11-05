@@ -5,7 +5,7 @@ This example shows how to use the chunks api to insert chunks of html throughout
 
 If you dont have the repo installed, do so by running:
 ```
-git clone https://github.com/XodoDocs/web-to-pdf.git
+git clone https://github.com/PDFTron/web-to-pdf.git
 cd web-to-pdf
 npm i
 ```

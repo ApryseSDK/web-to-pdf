@@ -81,7 +81,7 @@ See [the docs](./documentation/real-time.md) for more info.
 
 ## Development
 ```
-git clone https://github.com/XodoDocs/web-to-pdf.git
+git clone https://github.com/PDFTron/web-to-pdf.git
 cd web-to-pdf
 npm i
 ```

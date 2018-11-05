@@ -5,7 +5,7 @@ This example shows how we can use a third party JS library to render elements in
 
 If you dont have the repo installed, do so by running:
 ```
-git clone https://github.com/XodoDocs/web-to-pdf.git
+git clone https://github.com/PDFTron/web-to-pdf.git
 cd web-to-pdf
 npm i
 ```

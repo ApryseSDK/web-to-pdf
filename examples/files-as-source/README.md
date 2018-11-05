@@ -7,7 +7,7 @@ This example also shows how you can use Google Fonts to style your text.
 
 If you dont have the repo installed, do so by running:
 ```
-git clone https://github.com/XodoDocs/web-to-pdf.git
+git clone https://github.com/PDFTron/web-to-pdf.git
 cd web-to-pdf
 npm i
 ```

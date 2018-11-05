@@ -5,7 +5,7 @@ Web-to-pdf can accept a function as a source. This function can be async, meanin
 
 If you dont have the repo installed, do so by running:
 ```
-git clone https://github.com/XodoDocs/web-to-pdf.git
+git clone https://github.com/PDFTron/web-to-pdf.git
 cd web-to-pdf
 npm i
 ```

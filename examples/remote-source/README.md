@@ -7,7 +7,7 @@ This example shows how we can inject CSS into a remote page to format it before 
 
 If you dont have the repo installed, do so by running:
 ```
-git clone https://github.com/XodoDocs/web-to-pdf.git
+git clone https://github.com/PDFTron/web-to-pdf.git
 cd web-to-pdf
 npm i
 ```

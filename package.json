@@ -14,14 +14,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/XodoDocs/web-to-pdf.git"
+    "url": "git+https://github.com/PDFTron/web-to-pdf.git"
   },
   "author": "Logan Bittner",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/XodoDocs/web-to-pdf/issues"
+    "url": "https://github.com/PDFTron/web-to-pdf/issues"
   },
-  "homepage": "https://github.com/XodoDocs/web-to-pdf#readme",
+  "homepage": "https://github.com/PDFTron/web-to-pdf#readme",
   "dependencies": {
     "@babel/runtime": "^7.1.2",
     "anymatch": "^2.0.0",
