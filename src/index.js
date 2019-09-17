@@ -1,10 +1,7 @@
-require('@babel/polyfill');
+// require('@babel/polyfill');
 
 const isProd = process.env.NODE_ENV === 'production';
 
-if (isProd) {
-  require('./styles/index.css') 
-}
 const readFile = require('./util/read-file');
 const server = require('./server');
 const printPDF = require('./util/print-pdf');

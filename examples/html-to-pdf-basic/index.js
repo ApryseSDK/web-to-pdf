@@ -1,4 +1,4 @@
-const WebToPDF = require('../../src/index');
+const WebToPDF = require('../../dist/web-to-pdf');
 // const WebToPDF = require('@pdftron/web-to-pdf'); // or this
 
 (async () => {

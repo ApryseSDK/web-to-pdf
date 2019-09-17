@@ -2,7 +2,7 @@ const path = require('path');
 // const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { IgnorePlugin } = require('webpack');
 const webpack = require('webpack');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   target: 'node',
@@ -11,7 +11,7 @@ module.exports = {
     __dirname: false,
   },
   entry: ['./src/index.js'],
-  devtool: 'source-map',
+  devtool: '',
   externals: ['aws-sdk', 'puppeteer', 'node-sass', 'live-server'],
   output: {
     filename: 'web-to-pdf.js',
@@ -27,13 +27,10 @@ module.exports = {
       'process.env.NODE_ENV': JSON.stringify('production')
     }),
     new webpack.BannerPlugin({ banner: "#!/usr/bin/env node", raw: true, entryOnly: true, include: 'web-to-pdf.js' }),
-    new MiniCssExtractPlugin({
-      // Options similar to the same options in webpackOptions.output
-      // both options are optional
-      filename: "index.css"
-    }),
-    
-    
+    new CopyPlugin([
+      { from: 'src/styles/index.css', to: 'index.css' },
+    ]),
+  
   ],
   module: {
     rules: [{
@@ -42,24 +39,9 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ["@babel/preset-react", "@babel/preset-env"],
+            presets: ["@babel/preset-react"],
           }
         }
-      },
-      {
-        test: /\.scss$/,
-        use: [
-            MiniCssExtractPlugin.loader,
-            "css-loader", // translates CSS into CommonJS
-            "sass-loader" // compiles Sass to CSS
-        ]
-      },
-      {
-        test: /\.css$/,
-        use: [
-          'style-loader',
-          'css-loader'
-        ]
       },
       {
         test: /\.node$/,

@@ -6,17 +6,17 @@ const path = require('path');
 const Renderer = require('../src');
 
 describe('real time listener', () => {
-  it('can listen to files and return changed files', (done) => {
+  // it('can listen to files and return changed files', (done) => {
 
-    const w = listenToChanges([path.resolve(__dirname, 'assets/temp.txt')], (changes) => {
-      assert(changes.length === 1);
-      assert(changes[0] === path.resolve(__dirname, 'assets/temp.txt'));
-      w.close();
-      done();
-    })
+  //   const w = listenToChanges([path.resolve(__dirname, 'assets/temp.txt')], (changes) => {
+  //     assert(changes.length === 1);
+  //     assert(changes[0] === path.resolve(__dirname, 'assets/temp.txt'));
+  //     w.close();
+  //     done();
+  //   })
 
-    writeFile(path.resolve(__dirname, 'assets/temp.txt'), `My data ${Math.random()}`);
-  }).timeout(60000);
+  //   writeFile(path.resolve(__dirname, 'assets/temp.txt'), `My data ${Math.random()}`);
+  // }).timeout(60000);
 
   it('ignored empty entries', (done) => {
 
