@@ -11,6 +11,7 @@ pages/
 test-examples/
 examples/template/
 package-lock.json
+test/assets/temp.txt
 # Runtime data
 pids
 *.pid

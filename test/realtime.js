@@ -28,7 +28,7 @@ describe('real time listener', () => {
     })
 
     writeFile(path.resolve(__dirname, 'assets/temp.txt'), `My data ${Math.random()}`);
-  });
+  }).timeout(6000);
 
   it('can ignore files', (done) => {
 

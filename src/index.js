@@ -325,19 +325,6 @@ class Renderer {
         writer.addWrite(Writer.TYPES.SCRIPT, Writer.METHODS.COPY, to, fullPath);
     });
 
-    // copy assets
-    assets = [...assets, ...getAssetSources(html, this.dirname)];
-    assets.forEach((asset) => {
-      
-      const relativeLocation = Path.relative(this.dirname, asset)
-      writer.addWrite(
-        Writer.TYPES.ASSET,
-        Writer.METHODS.COPY,
-        Path.join(`${outputFolder}/${outputName}`, relativeLocation),
-        asset
-      )
-    })
-    
     styles = [...styles, ...(getCssSrc(html, templateSource, this.dirname) || [])];
     // this will store the paths of any stylesheets linked in the root scss (for listening purposes)
     // Get css
@@ -367,6 +354,18 @@ class Renderer {
     html = injectCustomScripts(html, obj, pageClass);
     html = pretty(html, { ocd: true });
 
+    // copy assets
+    assets = [...assets, ...getAssetSources(html, customCss, this.dirname)];
+    assets.forEach((asset) => {
+      
+      const relativeLocation = Path.relative(this.dirname, asset)
+      writer.addWrite(
+        Writer.TYPES.ASSET,
+        Writer.METHODS.COPY,
+        Path.join(`${outputFolder}/${outputName}`, relativeLocation),
+        asset
+      )
+    })
 
     const nextMiddleWare = async () => {
       const next = middleware.pop();

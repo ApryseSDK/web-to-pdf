@@ -3,9 +3,8 @@ const getAssetSources = require('../src/util/get-asset-source');
 const assert = require('assert');
 const path = require('path');
 
-
 describe('assets', () => {
-  it('can get a list of assets', async () => {
+  it('can get a list of assets from HTML', async () => {
     
     const html = `
       <div>
@@ -14,7 +13,7 @@ describe('assets', () => {
       </div>
     `
 
-    const r = getAssetSources(html, __dirname);
+    const r = getAssetSources(html, null, __dirname);
 
     assert(r.length === 2);
     assert(r.indexOf(path.resolve(__dirname, 'img.png')) > -1);
@@ -22,5 +21,28 @@ describe('assets', () => {
 
     return;
   });
+
+  it('can get a list of assets from css', async () => {
+
+    const html = `
+      <div>
+      </div>
+    `
+
+    const css = `
+      .bg {
+        background-image: url('img.png');
+      }
+    `
+
+    const r = getAssetSources(html, css, __dirname);
+
+    assert(r.length === 1);
+    assert(r.indexOf(path.resolve(__dirname, 'img.png')) > -1);
+
+    return;
+
+
+  })
 
 })

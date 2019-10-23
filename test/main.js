@@ -381,6 +381,36 @@ describe('WebToPDF', () => {
     return;
   }).timeout(1233333)
 
+
+  it.only('gets image sources in chunks', async () => {
+    const ren = new Renderer({ dirname: __dirname });
+
+    const html = `
+      <div class='Page'>
+        {{htmlChunk}}
+      </div>
+    `;
+
+    const sm = await ren.render({
+      templateSource: html,
+      chunks: {
+        htmlChunk: `
+          <div class='htmlChunk'>
+            <p>I will be dynamically inserted!</p>
+            <img src='./test.png'></img>
+          </div>
+        `
+      },
+    })
+
+    const assets = sm.sourceMap.assets;
+    assert.ok(assets);
+    assert.ok(assets.length === 1);
+    assert.ok(assets[0].from.indexOf('test.png') > -1)
+   
+    // const returnedHTML = sm.sourceMap.html[0].from;
+  }).timeout(6000)
+
   it('can accept inline styles as a styles param', async () => {
     const ren = new Renderer({ dirname: __dirname });
 
