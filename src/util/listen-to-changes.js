@@ -1,6 +1,7 @@
 const chokidar = require('chokidar');
 const chalk = require('chalk');
 const anymatch = require('anymatch');
+const fs = require('fs-extra');
 
 module.exports = (sources, callback, debug, ignoreWatch) => {
   let throttle = null;
@@ -14,6 +15,11 @@ module.exports = (sources, callback, debug, ignoreWatch) => {
     if (!src || src === '') {
       return false;
     }
+
+    if (!fs.existsSync(src)) {
+      return false;
+    }
+
     if (sources.indexOf(src) === index) {
       return true;
     }

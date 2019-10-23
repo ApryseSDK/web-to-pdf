@@ -10,6 +10,6 @@ module.exports = () => {
     templateSource: './src/index.html',
     contentSource,
     outputName: "real-time",
-    pageClass: "Split"
+    pageClass: "Split",
   }
 }
