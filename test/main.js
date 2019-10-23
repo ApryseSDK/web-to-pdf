@@ -382,7 +382,7 @@ describe('WebToPDF', () => {
   }).timeout(1233333)
 
 
-  it.only('gets image sources in chunks', async () => {
+  it('gets image sources in chunks', async () => {
     const ren = new Renderer({ dirname: __dirname });
 
     const html = `
