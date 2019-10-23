@@ -328,11 +328,14 @@ class Renderer {
     // copy assets
     assets = [...assets, ...getAssetSources(html, this.dirname)];
     assets.forEach((asset) => {
-      const ree = Path.resolve(re, asset);
-      const re = Path.relative(ree, process.cwd());
-      const count = (re.match(/\//g) || []).length - 1;
-      const name = ree.split('/').slice(-1 * (count)).join('/');
-      writer.addWrite(Writer.TYPES.ASSET, Writer.METHODS.COPY, `${outputFolder}/${outputName}/${name}`, asset)
+      
+      const relativeLocation = Path.relative(this.dirname, asset)
+      writer.addWrite(
+        Writer.TYPES.ASSET,
+        Writer.METHODS.COPY,
+        Path.join(`${outputFolder}/${outputName}`, relativeLocation),
+        asset
+      )
     })
     
     styles = [...styles, ...(getCssSrc(html, templateSource, this.dirname) || [])];
