@@ -6,31 +6,34 @@ const path = require('path');
 module.exports = (sources, callback, debug, ignoreWatch, dirname) => {
   let throttle = null;
 
-  sources = sources.filter((src, index) => {
+  sources = sources.reduce((acc, src) => {
     if (typeof src !== 'string') {
-      return false;
+      return acc;
     }
 
-    if (ignoreWatch) {
-      if (anymatch(ignoreWatch, src)) {
-        return false;
-      }
+    if (ignoreWatch && anymatch(ignoreWatch, src)) {
+      return acc;
     }
+
     if (!src || src === '') {
-      return false;
+      return acc;
     }
 
     if (!fs.existsSync(src)) {
 
       // try to resolve it
       src = path.resolve(dirname, src);
+
       if (!fs.existsSync(src)) {
-        return false;
+        return acc;
       }
+      
     }
 
-    return true;
-  });
+    acc.push(src);
+
+    return acc;
+  }, []);
 
   if (debug) {
     console.log(chalk.bgMagenta.whiteBright('Listening to these files:'))
