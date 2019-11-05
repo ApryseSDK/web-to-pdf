@@ -1,6 +1,6 @@
 {
   "name": "@pdftron/web-to-pdf",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Headless HTML to PDF conversion",
   "main": "dist/web-to-pdf.js",
   "bin": {
