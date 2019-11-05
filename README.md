@@ -16,7 +16,7 @@ Created and maintained by [PDFTron](https://pdftron.com).
 - 🔗 Support for reusuable [HTML chunks](https://github.com/PDFTron/web-to-pdf/tree/master/documentation/chunks.md)
 - 🎥 [Real time mode](https://github.com/PDFTron/web-to-pdf/tree/master/documentation/real-time.md) with hot reloading, meaning you can build your PDF in real time
 - 🌏 Support for [rendering remote pages](https://github.com/PDFTron/web-to-pdf/tree/master/documentation/remote-api.md) (You can even inject your own css and js!)
-- 🚦 Memory management system so you can render 1000's of PDFs with a single script.
+- 🚦 Queueing system so you can render 1000's of PDFs with a single script.
 - 👍 Much more!
 
 ## Roadmap
