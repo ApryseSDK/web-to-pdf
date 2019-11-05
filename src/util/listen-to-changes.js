@@ -2,11 +2,15 @@ const chokidar = require('chokidar');
 const chalk = require('chalk');
 const anymatch = require('anymatch');
 const fs = require('fs-extra');
-
-module.exports = (sources, callback, debug, ignoreWatch) => {
+const path = require('path');
+module.exports = (sources, callback, debug, ignoreWatch, dirname) => {
   let throttle = null;
 
   sources = sources.filter((src, index) => {
+    if (typeof src !== 'string') {
+      return false;
+    }
+
     if (ignoreWatch) {
       if (anymatch(ignoreWatch, src)) {
         return false;
@@ -17,13 +21,15 @@ module.exports = (sources, callback, debug, ignoreWatch) => {
     }
 
     if (!fs.existsSync(src)) {
-      return false;
+
+      // try to resolve it
+      src = path.resolve(dirname, src);
+      if (!fs.existsSync(src)) {
+        return false;
+      }
     }
 
-    if (sources.indexOf(src) === index) {
-      return true;
-    }
-    return false;
+    return true;
   });
 
   if (debug) {

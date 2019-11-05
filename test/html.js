@@ -11,17 +11,14 @@ describe('HTML Parser', () => {
   })
 
   it('can get html from a file', async () => {
-    const { html, listenableSource } = await htmlGetter('assets/index.html');
-    
+    const  html = await htmlGetter('assets/index.html');
     assert(html.indexOf('Page'));
-    assert(listenableSource);
     return;
   });
 
   it ('can get html from a string', async () => {
-    const { html, listenableSource } = await htmlGetter(`<html><div class='Page'></div></html>`);
+    const html = await htmlGetter(`<html><div class='Page'></div></html>`);
     assert(html.indexOf('Page'));
-    assert(!listenableSource);
     return;
   })
 
@@ -29,9 +26,8 @@ describe('HTML Parser', () => {
     const fun = () => {
       return `<html><div class='Page'></div></html>`;
     }
-    const { html, listenableSource } = await htmlGetter(fun);
+    const html = await htmlGetter(fun);
     assert(html.indexOf('Page'));
-    assert(!listenableSource);
     return;
   })
 
@@ -43,9 +39,8 @@ describe('HTML Parser', () => {
         }, 1000)
       });
     }
-    const { html, listenableSource } = await htmlGetter(fun);
+    const html = await htmlGetter(fun);
     assert(html.indexOf('Page'));
-    assert(!listenableSource);
     return;
   })
 
@@ -58,9 +53,8 @@ describe('HTML Parser', () => {
       }
     }
 
-    const { html, listenableSource } = await htmlGetter(Comp);
+    const html = await htmlGetter(Comp);
     assert(html.indexOf('Page'));
-    assert(!listenableSource);
     return;
   });
 
@@ -70,9 +64,8 @@ describe('HTML Parser', () => {
       return  <div className='Page'></div>
     }
 
-    const { html, listenableSource } = await htmlGetter(Comp);
+    const html = await htmlGetter(Comp);
     assert(html.indexOf('Page'));
-    assert(!listenableSource);
     return;
   })
 

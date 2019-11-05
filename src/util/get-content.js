@@ -4,7 +4,6 @@ const Path = require('path');
 const chalk = require('chalk');
 
 module.exports = async ({ contentSource, debug, dirname }) => {
-  let listenableContentSource = false;
   let obj = {};
       // If content source is set, parse it an apply it
     if (contentSource) {
@@ -14,8 +13,6 @@ module.exports = async ({ contentSource, debug, dirname }) => {
         contentSource = contentSource.trim();
         if (contentSource.endsWith('.json')) {
           const j = await readFile(Path.resolve(dirname, contentSource));
-          listenableContentSource = true;
-
           try {
             obj = JSON.parse(j);
           } catch (e) {
@@ -46,7 +43,5 @@ module.exports = async ({ contentSource, debug, dirname }) => {
     }
   
   
-  return {
-    listenableContentSource, obj
-  }
+  return obj;
 }

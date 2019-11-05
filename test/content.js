@@ -5,17 +5,16 @@ const Renderer = require('../src');
 
 describe('get content', () => {
   it('can read a json file', async () => {
-    const { obj, listenableContentSource } = await GetContent({
+    const obj = await GetContent({
       contentSource: 'assets/content.json',
       dirname: __dirname
     });
     assert(obj.test, 'test');
-    assert(listenableContentSource);
     return;
   });
 
   it('can read a js object', async () => {
-    const { obj, listenableContentSource } = await GetContent({
+    const obj = await GetContent({
       contentSource: {
         test: 'test'
       },
@@ -23,7 +22,6 @@ describe('get content', () => {
     });
 
     assert(obj.test, 'test');
-    assert(!listenableContentSource);
     return;
   });
 
@@ -55,8 +53,6 @@ describe('get content', () => {
     });
 
     assert(result.sourceMap.html[0].from.indexOf('Wow!') > -1);
-
-
 
   }).timeout(7000)
 })

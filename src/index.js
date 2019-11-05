@@ -8,8 +8,7 @@ const printPDF = require('./util/print-pdf');
 const ensureExists = require('./util/ensure-exists');
 const injectStyles = require('./util/inject-styles');
 const cleanHTML = require('./util/clean-html');
-const getScriptSrc = require('./util/get-script-src');
-const toAbsolute = require('./util/to-absolute');
+const getScriptSrc = require('./util/get-script-src');;
 const listenToChanges = require('./util/listen-to-changes');
 const getCssSrc = require('./util/get-css-src');
 const getHTMLFromSource = require('./util/get-html-from-source');
@@ -58,8 +57,6 @@ class Renderer {
 
     // internal stuff
     this._listening = false;
-    this._injectedScripts = [];
-    this._lastObject = null;
 
     this._changeFunc = null;
     this._renderedHTML = null;
@@ -166,8 +163,7 @@ class Renderer {
   render(options) {
     return new Promise(async (r) => {
       const optionsResult = await getOptions(options, this.dirname);
-      let optionsPath = '';
-      ({ options, optionsPath } = optionsResult);
+      ({ options } = optionsResult);
       this._pushQueue(async () => {
         let result;
         if (typeof options.templateSource === 'string') {
@@ -226,13 +222,15 @@ class Renderer {
 
     if (this._changeFunc && !this._listening) {
       this.listener = listenToChanges([
-          ...toAbsolute(scripts, this.dirname),
-          ...toAbsolute(styles, this.dirname),
-          ...linkedStyles
+          ...scripts,
+          ...styles,
+          ...linkedStyles,
+          optionsPath
         ],
         this._changeFunc,
         this.debug,
-        ignoreWatch
+        ignoreWatch,
+        this.dirname
       );
 
       this._listening = true;
@@ -276,36 +274,26 @@ class Renderer {
       await this._stop(new Error('templateSource is required'));
     }
 
-    let obj = this._lastObject || null;
-    // these determine if we should add a change listener on certain source files.
-    // they are set throughout the code when source types are determined.
-    let listenableContentSource = false;
-
     // If content source is set, parse it an apply it
-    ({ obj, listenableContentSource } = await getContent({
+    let content = await getContent({
       contentSource, debug: this.debug, dirname: this.dirname
-    }))
-    this._lastObject = obj;
-    
-
+    })
+  
     // pass options into closure to avoid duplicating parameters everywhere
     const htmlGetter = getHTMLFromSource({
       debug: this.debug,
       dirname: this.dirname,
       listening: this._listening,
-      obj
+      content
     })
 
-    let { html, listenableSource } = await htmlGetter(templateSource, 'templateSource');
-    let listenableChunks = [];
+    let html = await htmlGetter(templateSource, 'templateSource');
+
     // Chunks!
     const chunkP = Object.keys(chunks).map((chunkName) => {
       return new Promise(async (r) => {
-        const { html: chunkData, listenableSource: l  } = await htmlGetter(chunks[chunkName], chunkName);
+        const chunkData = await htmlGetter(chunks[chunkName], chunkName);
         html = insertContent(html, { [chunkName]: cleanHTML(chunkData) });
-        if (l) {
-          listenableChunks.push(chunks[chunkName]);
-        }
         r();
       })
     })
@@ -315,34 +303,29 @@ class Renderer {
       await this._stop(new Error('Could not parse templateSource to html, please make sure your input is a supported format.'));
     }
     
-    this._injectedScripts = [];
     //copy scripts
-
     const scripts = getScriptSrc(html, templateSource, this.dirname);
     scripts.forEach(({ fullPath, relativePath }) => {
         const to = Path.join(`${outputFolder}/${outputName}/`, relativePath);
-        this._injectedScripts.push(to);
         writer.addWrite(Writer.TYPES.SCRIPT, Writer.METHODS.COPY, to, fullPath);
     });
 
-    styles = [...styles, ...(getCssSrc(html, templateSource, this.dirname) || [])];
-    // this will store the paths of any stylesheets linked in the root scss (for listening purposes)
-    // Get css
 
+    styles = [...styles, ...(getCssSrc(html, templateSource, this.dirname) || [])];
     const cssResult = await getCustomCSS(styles, this.dirname, this.debug);
 
-    let { linkedStyles } = cssResult;
-    let customCss = cssResult.css;
+    let { linkedStyles, css } = cssResult;
+    let customCss = css;
 
     let headerChunk = '';
     let footerChunk = '';
 
     if (chunks.header) {
-      ({ html: headerChunk } = await htmlGetter(chunks.header, 'header'));
+      headerChunk = await htmlGetter(chunks.header, 'header');
     }
 
     if (chunks.footer) {
-      ({ html: footerChunk } = await htmlGetter(chunks.footer, 'footer'));
+      footerChunk = await htmlGetter(chunks.footer, 'footer');
     }
     
     //HTML transforms
@@ -351,7 +334,7 @@ class Renderer {
     html = injectHeaderAndFooter(html, pageClass, headerChunk, footerChunk);
     html = injectStyles(html, !!customCss);
     html = replacePageNumbers(html, pageClass);
-    html = injectCustomScripts(html, obj, pageClass);
+    html = injectCustomScripts(html, content, pageClass);
     html = pretty(html, { ocd: true });
 
     // copy assets
@@ -437,18 +420,19 @@ class Renderer {
     if (this._changeFunc && !this._listening) {
       this.listener = listenToChanges(
         [
-          ...toAbsolute(styles, this.dirname),
+          contentSource,
+          templateSource,
+          ...Object.values(chunks),
+          ...scripts,
+          ...styles,
           ...assets,
-          ...toAbsolute(scripts, this.dirname),
-          ...toAbsolute(listenableChunks, this.dirname),
-          listenableSource ? Path.resolve(this.dirname, templateSource) : '',
-          listenableContentSource ? Path.resolve(this.dirname, contentSource) : '',
           ...linkedStyles,
-          optionsPath
+          optionsPath,
         ],
         this._changeFunc,
         this.debug,
-        ignoreWatch
+        ignoreWatch,
+        this.dirname
       );
 
       this._listening = true;

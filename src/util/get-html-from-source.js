@@ -7,11 +7,10 @@ const readFile = require('./read-file');
 
 const TYPES = getRenderType.TYPES;
 
-module.exports = ({debug, listening, dirname, obj}) => async (templateSource, chunkName) => {
+module.exports = ({debug, listening, dirname, content}) => async (templateSource, chunkName) => {
 
-  const renderType = getRenderType(templateSource, obj);
+  const renderType = getRenderType(templateSource, content);
   let html = null;
-  let listenableSource = false;
 
   if (debug && !listening) {
     console.log(chalk.black(`Using type ${chalk.whiteBright.bold.bgBlack(' ' + renderType + ' ')} for ${chalk.bold(chunkName)}`));
@@ -20,12 +19,12 @@ module.exports = ({debug, listening, dirname, obj}) => async (templateSource, ch
   switch (renderType) {
     case TYPES.REACT_COMPONENT:
       {
-        html = reactToHTML({ Component: templateSource, content: obj })
+        html = reactToHTML({ Component: templateSource, content })
         break;
       }
     case TYPES.CUSTOM_FUNCTION:
       {
-        html = await templateSource(obj);
+        html = await templateSource(content);
         break;
       }
     case TYPES.HTML_STRING:
@@ -35,7 +34,6 @@ module.exports = ({debug, listening, dirname, obj}) => async (templateSource, ch
       }
     case TYPES.HTML_FILE:
       {
-        listenableSource = true;
         html = await readFile(Path.resolve(dirname, templateSource));
         if (html === null) {
           throw new Error(`File ${templateSource} was not found.`);
@@ -45,9 +43,9 @@ module.exports = ({debug, listening, dirname, obj}) => async (templateSource, ch
   }
 
    // replace content
-   if (obj) {
-    html = insertContent(html, obj);
+   if (content) {
+    html = insertContent(html, content);
   }
 
-  return { html, listenableSource };
+  return html;
 }
