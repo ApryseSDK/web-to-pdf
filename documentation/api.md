@@ -17,6 +17,7 @@ const renderer = new Renderer(options);
 - [port](#port)
 - [host](#host)
 - [autoOpen](#autoopen)
+- [args](#args)
 
 ### dirname (required)
 Directory of the file you are working in. Please pass `__dirname` for this option.
@@ -74,6 +75,9 @@ Host to run the local server on.
 Set to true to auto open the PDF once its done rendering. Ignored if you are in real time mode.
 
 **default**: false
+
+### args
+An array of arguments to pass to the puppeteer `launch` function. Possible values can be found [here](https://peter.sh/experiments/chromium-command-line-switches/)
 
 ## .render(renderOptions)
 
