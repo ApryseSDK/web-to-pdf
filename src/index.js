@@ -42,6 +42,7 @@ class Renderer {
     this.autoOpen = options.autoOpen || false;
     this.dirname = options.dirname;
     this.keepAlive = options.keepAlive || false;
+    this.args = options.args || [];
     this.margin = options.margin || {
       top: '0px',
       right: '0px',
@@ -66,11 +67,10 @@ class Renderer {
     this._maxWorkers = 20;
     this._lastPageSplitClass = 'Page';
 
-    const args = [];
     this.__browserPromise = new Promise(async (resolve) => {
       this.browser = await puppeteer.launch({
         headless: !this.__openBrowser,
-        args,
+        args: this.args,
         defaultViewport: {
           width: this.width,
           height: this.height === 'auto' ? 792 : this.height,
